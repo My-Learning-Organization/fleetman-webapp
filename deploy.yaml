@@ -39,6 +39,20 @@ spec:
   ports:
     - name: http
       port: 80
-      nodePort: 30080
 
-  type: NodePort
+  type: ClusterIP
+ 
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: public-routing
+spec:
+  rules:
+    - host: www.mukeshnhdhk.tk
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: fleetman-webapp
+              servicePort: 80
